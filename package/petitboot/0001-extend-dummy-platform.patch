@@ -1,0 +1,56 @@
+diff --git a/discover/platform-dummy.c b/discover/platform-dummy.c
+index 7c2e1dc..0f352bd 100644
+--- a/discover/platform-dummy.c
++++ b/discover/platform-dummy.c
+@@ -1,16 +1,47 @@
++#include <strings.h>
++
++#include <file/file.h>
++#include <talloc/talloc.h>
++
+ #include "platform.h"
+ 
+-static bool probe(struct platform *p, void *ctx)
++struct platform_dummy {
++	int dummy;
++};
++
++static const char *devtree_dir = "/proc/device-tree/";
++
++static int get_sysinfo(struct platform *p, struct system_info *sysinfo)
+ {
+-	(void)p;
+-	(void)ctx;
++	struct platform_dummy *platform = p->platform_data;
++	char *buf, *filename;
++	int len, rc;
++
++	//bzero(sysinfo, sizeof(*sysinfo));
+ 
+-	return false;
++	rc = read_file(platform, "/proc/device-tree/model", &buf, &len);
++	if (rc == 0)
++		sysinfo->type = talloc_steal(sysinfo, buf);
++
++	rc = read_file(platform, "/proc/device-tree/system-id", &buf, &len);
++	if (rc == 0)
++		sysinfo->identifier = talloc_steal(sysinfo, buf);
++
++	return 0;
++}
++
++static bool probe(struct platform *p, void *ctx)
++{
++	struct platform_dummy *platform;
++	platform = talloc_zero(ctx, struct platform_dummy);
++	p->platform_data = platform;
++	return true;
+ }
+ 
+ static struct platform dummy = {
+ 	.name			= "dummy",
+ 	.probe			= probe,
++	.get_sysinfo	= get_sysinfo,
+ };
+ 
+ register_platform(dummy);

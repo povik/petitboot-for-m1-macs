@@ -15,7 +15,7 @@ PETITBOOT_LICENSE_FILES = COPYING
 
 PETITBOOT_CONF_OPTS += --with-ncurses --without-twin-x11 --without-twin-fbdev \
 	      --localstatedir=/var \
-	      --enable-crypt \
+	      --enable-crypt --disable-platform-auto \
 	      HOST_PROG_KEXEC=/usr/sbin/kexec \
 	      HOST_PROG_SHUTDOWN=/usr/libexec/petitboot/bb-kexec-reboot \
 	      $(if $(BR2_PACKAGE_BUSYBOX),--with-tftp=busybox --enable-busybox)
