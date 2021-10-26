@@ -1,0 +1,5 @@
+config BR2_PACKAGE_PETITBOOT_M1_HOOK
+	bool "petitboot devicetree hook on Apple M1"
+	help
+	  Enable hook for Petitboot which fills runtime information into the devicetree blobs
+	  associated with boot menu options.
