@@ -1,0 +1,4 @@
+[submodule "linux-source"]
+	path = linux-source
+	url = https://github.com/povik/linux.git
+	branch = asahi/for-petitboot
