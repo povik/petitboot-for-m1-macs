@@ -4,6 +4,8 @@
 #
 ################################################################################
 
+PETITBOOT_DEBUG=y
+
 PETITBOOT_VERSION = v1.12
 PETITBOOT_SOURCE = petitboot-$(PETITBOOT_VERSION).tar.gz
 PETITBOOT_SITE ?= https://github.com/open-power/petitboot/releases/download/$(PETITBOOT_VERSION)
