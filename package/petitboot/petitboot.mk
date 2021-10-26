@@ -38,11 +38,11 @@ endif
 define PETITBOOT_POST_INSTALL
 	$(INSTALL) -D -m 0755 $(@D)/utils/bb-kexec-reboot \
 		$(TARGET_DIR)/usr/libexec/petitboot
-	$(INSTALL) -d -m 0755 $(TARGET_DIR)/etc/petitboot/boot.d
-	$(INSTALL) -D -m 0755 $(@D)/utils/hooks/01-create-default-dtb \
-		$(TARGET_DIR)/etc/petitboot/boot.d/
-	$(INSTALL) -D -m 0755 $(@D)/utils/hooks/90-sort-dtb \
-		$(TARGET_DIR)/etc/petitboot/boot.d/
+	#$(INSTALL) -d -m 0755 $(TARGET_DIR)/etc/petitboot/boot.d
+	#$(INSTALL) -D -m 0755 $(@D)/utils/hooks/01-create-default-dtb \
+	#	$(TARGET_DIR)/etc/petitboot/boot.d/
+	#$(INSTALL) -D -m 0755 $(@D)/utils/hooks/90-sort-dtb \
+	#	$(TARGET_DIR)/etc/petitboot/boot.d/
 
 	$(INSTALL) -D -m 0755 $(PETITBOOT_PKGDIR)/S14silence-console \
 		$(TARGET_DIR)/etc/init.d/
@@ -74,8 +74,8 @@ define PETITBOOT_POST_INSTALL
 endef
 
 define PETITBOOT_POST_INSTALL_DTB
-	$(INSTALL) -D -m 0755 $(@D)/utils/hooks/30-dtb-updates \
-		$(TARGET_DIR)/etc/petitboot/boot.d/
+	#$(INSTALL) -D -m 0755 $(@D)/utils/hooks/30-dtb-updates \
+	#	$(TARGET_DIR)/etc/petitboot/boot.d/
 endef
 
 PETITBOOT_POST_INSTALL_TARGET_HOOKS += PETITBOOT_POST_INSTALL

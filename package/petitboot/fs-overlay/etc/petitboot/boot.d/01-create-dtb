@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#[ -n "$boot_dtb" ] && exit;
+[ ! -e /sys/firmware/fdt ] && exit
+
+dtb=$(mktemp)
+
+[ -n "$boot_dtb" ] || boot_dtb="/sys/firmware/fdt"
+
+# just a fancy copy
+dtc -I dtb -O dtb -o $dtb "$boot_dtb"
+
+echo "boot_dtb=$dtb"
+exit 2
